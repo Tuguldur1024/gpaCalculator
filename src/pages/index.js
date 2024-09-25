@@ -46,6 +46,7 @@ const Home = () => {
           }
           .heart::before {
             top: -75px;
+            left: 12.5px; /* Adjust this to position better on larger screens */
           }
           .heart::after {
             left: 75px;
@@ -64,6 +65,7 @@ const Home = () => {
           }
           .heart::before {
             top: -100px;
+            left: 25px; /* Adjusted positioning */
           }
           .heart::after {
             left: 100px;
