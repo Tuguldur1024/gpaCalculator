@@ -6,11 +6,11 @@ const Golch = () => {
   return (
     <div>
       <div>Golch dun</div>
-      <div>
+      {/* <div>
         {numberOfStudies.map((study) => {
           return <div></div>;
         })}
-      </div>
+      </div> */}
     </div>
   );
 };
