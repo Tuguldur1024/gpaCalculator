@@ -44,7 +44,7 @@ const Golch = () => {
 
   const myGPA = calculateGPA();
   return (
-    <div className="w-screen h-screen bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-20">
+    <div className=" bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-20">
       <div className="relative w-[150px] h-[100px] bg-white flex items-center justify-center overflow-hidden">
         {/* Curved Zebra Stripe Background */}
         <div className="absolute inset-0 w-full h-full">
