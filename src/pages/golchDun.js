@@ -44,7 +44,7 @@ const Golch = () => {
 
   const myGPA = calculateGPA();
   return (
-    <div className=" bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-20">
+    <div className="min-h-[1500px] bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-10">
       <div className="relative w-[150px] h-[100px] bg-white flex items-center justify-center overflow-hidden">
         {/* Curved Zebra Stripe Background */}
         <div className="absolute inset-0 w-full h-full">
@@ -106,13 +106,12 @@ const Golch = () => {
           return (
             <div
               key={index}
-              className="flex bg-white gap-10 rounded-full px-10 py-5"
+              className="flex bg-white gap-7 rounded-full px-5 py-3"
             >
               <select
                 name="Дүн"
                 className="px-6 border border-gray-500 rounded-full py-2 text-xl"
                 onChange={(e) => handleGradeChange(index, e.target.value)}
-                value={study.grade}
               >
                 <option selected> Дүн </option>
                 <option value={4}> A / 95-100 </option>
