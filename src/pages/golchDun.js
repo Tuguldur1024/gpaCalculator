@@ -1,14 +1,48 @@
 import { useState, useEffect } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 const Golch = () => {
-  const [numberOfStudies, setNumberofStudies] = useState([1]);
+  const [numberOfStudies, setNumberofStudies] = useState([
+    { grade: 0, credit: 0 },
+  ]);
+  const [totalGrade, setTotalGrade] = useState(0);
+
   const handlePlus = () => {
-    let newStudies = numberOfStudies;
-    newStudies.push(1);
+    setNumberofStudies([...numberOfStudies, { grade: 0, credit: 0 }]);
+  };
+
+  const handleGradeChange = (index, newGrade) => {
+    const newStudies = [...numberOfStudies];
+    newStudies[index].grade = parseFloat(newGrade);
     setNumberofStudies(newStudies);
   };
-  const handleDelete = () => {};
-  let myGPA = 0.0;
+
+  const handleCreditChange = (index, newCredit) => {
+    const newStudies = [...numberOfStudies];
+    newStudies[index].credit = parseInt(newCredit, 10);
+    setNumberofStudies(newStudies);
+  };
+
+  const handleDelete = (index) => {
+    const newStudies = numberOfStudies.filter((_, i) => i !== index);
+    setNumberofStudies(newStudies);
+  };
+
+  const calculateGPA = () => {
+    const totalCredits = numberOfStudies.reduce(
+      (acc, study) => acc + study.credit,
+      0
+    );
+    const weightedSum = numberOfStudies.reduce(
+      (acc, study) => acc + study.grade * study.credit,
+      0
+    );
+
+    return totalCredits > 0 ? (weightedSum / totalCredits).toFixed(2) : 0.0;
+  };
+
+  const myGPA = calculateGPA();
   return (
     <div className="w-screen h-screen bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-20">
       <div className="relative w-[150px] h-[100px] bg-white flex items-center justify-center overflow-hidden">
@@ -67,32 +101,57 @@ const Golch = () => {
           }
         }
       `}</style>
-
-      <div className="flex bg-white gap-10 rounded-full px-10 py-5">
-        <select
-          name="Дүн"
-          className="px-6 border border-gray-500 rounded-full py-2"
-        >
-          <option selected> Дүн </option>
-          <option value={4}> A / 95-100 </option>
-          <option value={3.6}>A- / 90-94</option>
-          <option value={3.1}> B / 85-89</option>
-          <option value={2.7}> B- / 80-84</option>
-          <option value={2.3}> C /75-79 </option>
-          <option value={1.9}> C- /70-74 </option>
-          <option value={1.4}> D /65-69 </option>
-          <option value={1}> D- /60-64 </option>
-          <option value={0}> F /0-59 </option>
-        </select>
-        <select className="px-4 border border-gray-500 rounded-full bg-white  text-xl">
-          <option defaultChecked> Кредит</option>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-        </select>
+      <div className="flex flex-col gap-5">
+        {numberOfStudies.map((study, index) => {
+          return (
+            <div
+              key={index}
+              className="flex bg-white gap-10 rounded-full px-10 py-5"
+            >
+              <select
+                name="Дүн"
+                className="px-6 border border-gray-500 rounded-full py-2 text-xl"
+                onChange={(e) => handleGradeChange(index, e.target.value)}
+                value={study.grade}
+              >
+                <option selected> Дүн </option>
+                <option value={4}> A / 95-100 </option>
+                <option value={3.6}>A- / 90-94</option>
+                <option value={3.1}> B / 85-89</option>
+                <option value={2.7}> B- / 80-84</option>
+                <option value={2.3}> C /75-79 </option>
+                <option value={1.9}> C- /70-74 </option>
+                <option value={1.4}> D /65-69 </option>
+                <option value={1}> D- /60-64 </option>
+                <option value={0}> F /0-59 </option>
+              </select>
+              <select
+                className="px-4 border border-gray-500 rounded-full bg-white  text-xl"
+                onChange={(e) => handleCreditChange(index, e.target.value)}
+                value={study.credit}
+              >
+                <option defaultChecked> Кредит</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+              </select>
+              <div
+                className="w-full flex items-center"
+                onClick={() => handleDelete(index)}
+              >
+                <FaRegTrashAlt size={25} />
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      <div></div>
+      <div
+        onClick={() => handlePlus()}
+        className="mt-7 bg-white rounded-[50px] px-5 py-5"
+      >
+        <FaPlus size={30} />
+      </div>
     </div>
   );
 };
