@@ -106,7 +106,7 @@ const Golch = () => {
           return (
             <div
               key={index}
-              className="flex bg-white gap-7 rounded-full px-5 py-3"
+              className="flex bg-white gap-5 rounded-full px-3 py-2"
             >
               <select
                 name="Дүн"
