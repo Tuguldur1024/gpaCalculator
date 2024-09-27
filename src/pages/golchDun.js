@@ -6,7 +6,6 @@ const Golch = () => {
   const [numberOfStudies, setNumberofStudies] = useState([
     { grade: 0, credit: 0 },
   ]);
-  const [totalGrade, setTotalGrade] = useState(0);
 
   const handlePlus = () => {
     setNumberofStudies([...numberOfStudies, { grade: 0, credit: 0 }]);
@@ -44,7 +43,7 @@ const Golch = () => {
 
   const myGPA = calculateGPA();
   return (
-    <div className="min-h-[1500px] bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-10">
+    <div className="min-h-screen bg-[#FE496C] flex flex-col gap-10 items-center px-10 py-10">
       <div className="relative w-[150px] h-[100px] bg-white flex items-center justify-center overflow-hidden">
         {/* Curved Zebra Stripe Background */}
         <div className="absolute inset-0 w-full h-full">
@@ -151,6 +150,7 @@ const Golch = () => {
       >
         <FaPlus size={30} />
       </div>
+      <p className="text-white font-bold text-3xl"> Made by 🤍 </p>
     </div>
   );
 };
